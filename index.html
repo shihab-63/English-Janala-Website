@@ -61,11 +61,11 @@
             </div>
             <ul
               tabindex="0"
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3.5 w-28 md:w-52 p-2 shadow"
             >
               <li>
                 <a href="#"
-                  ><button class="">
+                  ><button class="mb-1.5">
                     <i class="fa-solid fa-circle-question"></i> FAQ
                   </button></a
                 >
@@ -73,7 +73,7 @@
 
               <li>
                 <a href="#"
-                  ><button class="">
+                  ><button class="mb-1.5">
                     <i class="fa-solid fa-book-open"></i> Learn
                   </button></a
                 >
@@ -81,7 +81,7 @@
 
               <li>
                 <a href="#"
-                  ><button class="">
+                  ><button class="mb-1.5">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     LogOut
                   </button></a
@@ -119,8 +119,42 @@
           </ul>
         </div>
       </nav>
-      <!-- Hero Area -->
-      
     </header>
+
+    <main class="w-11/12 mx-auto">
+      <!-- Hero Area -->
+      <section class="flex flex-col-reverse md:flex-row items-center justify-between">
+        <!-- Left Content -->
+        <div class="text-center md:text-left">
+          <h1 class="text-4xl md:text-5xl font-bold">
+            <span class="text-[#00BCFF]">English</span> is Easy!!
+          </h1>
+          <p class="hind-siliguri-font text-[16px] md:text-lg text-[#18181B] font-medium my-6 max-w-[600px]">
+            আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা
+            আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে
+            অন্য একটি Level এ
+          </p>
+
+          <!-- Form -->
+          <form action="#" class="flex flex-col items-start max-w-80 mx-auto md:mx-0 gap-5">
+            <input
+              type="text"
+              placeholder="Enter Your Name"
+              class="input focus:outline-0"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              class="input focus:outline-0"
+            />
+            <button class="btn btn-primary w-full md:w-fit">Get Started</button>
+          </form>
+        </div>
+        <!-- Right Content -->
+        <div class="">
+          <img src="./assets/hero-student.png" alt="Hero Image" />
+        </div>
+      </section>
+    </main>
   </body>
 </html>
