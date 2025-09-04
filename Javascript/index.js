@@ -39,10 +39,10 @@ const displayLoadWord = (words) => {
 
   if (words.length === 0) {
     wordLessonSelect.innerHTML = `
-        <div class="col-span-full text-center py-8 space-y-6">
+        <div class="col-span-full text-center py-8 space-y-4 md:space-y-6">
             <img src="./assets/alert-error.png" alt="" class="mx-auto">
-            <p class="text-gray-500 text-xl hind-siliguri-font">আপনি এখনো কোন Lesson Select করেননি</p>
-            <h1 class="text-4xl font-bold">একটি Lesson Select করুন।</h1>
+            <p class="text-gray-500 text-lg md:text-xl hind-siliguri-font">আপনি এখনো কোন Lesson Select করেননি</p>
+            <h1 class="text-2xl md:text-4xl font-bold">একটি Lesson Select করুন।</h1>
         </div>
     `;
     return;

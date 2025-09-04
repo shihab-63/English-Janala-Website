@@ -27,12 +27,10 @@
     --text-5xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
-    --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
-    --radius-3xl: 1.5rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -303,11 +301,18 @@
   .gap-5 {
     gap: calc(var(--spacing) * 5);
   }
-  .space-y-5 {
+  .space-y-2 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 5) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 5) * calc(1 - var(--tw-space-y-reverse)));
+      margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .space-y-6 {
@@ -329,13 +334,6 @@
       --tw-space-x-reverse: 0;
       margin-inline-start: calc(calc(var(--spacing) * 4) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
-  .space-x-5 {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 5) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 5) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   .rounded-2xl {
@@ -375,14 +373,8 @@
   .p-10 {
     padding: calc(var(--spacing) * 10);
   }
-  .py-1 {
-    padding-block: calc(var(--spacing) * 1);
-  }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
-  }
-  .py-10 {
-    padding-block: calc(var(--spacing) * 10);
   }
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
@@ -394,13 +386,13 @@
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
-  .text-3xl {
-    font-size: var(--text-3xl);
-    line-height: var(--tw-leading, var(--text-3xl--line-height));
-  }
   .text-4xl {
     font-size: var(--text-4xl);
     line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
   }
   .text-sm {
     font-size: var(--text-sm);
@@ -448,9 +440,6 @@
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
-  }
-  .will-change-transform {
-    will-change: transform;
   }
   .hover\:bg-\[\#1A91FF50\] {
     &:hover {
@@ -500,6 +489,24 @@
       flex-direction: row;
     }
   }
+  .md\:space-y-6 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+      }
+    }
+  }
+  .md\:space-y-8 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing) * 8) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-y-reverse)));
+      }
+    }
+  }
   .md\:p-10 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing) * 10);
@@ -508,6 +515,11 @@
   .md\:p-12 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing) * 12);
+    }
+  }
+  .md\:py-12 {
+    @media (width >= 48rem) {
+      padding-block: calc(var(--spacing) * 12);
     }
   }
   .md\:text-left {
@@ -519,6 +531,12 @@
     @media (width >= 48rem) {
       font-size: var(--text-3xl);
       line-height: var(--tw-leading, var(--text-3xl--line-height));
+    }
+  }
+  .md\:text-4xl {
+    @media (width >= 48rem) {
+      font-size: var(--text-4xl);
+      line-height: var(--tw-leading, var(--text-4xl--line-height));
     }
   }
   .md\:text-5xl {
