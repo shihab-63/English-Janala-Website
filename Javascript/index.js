@@ -40,10 +40,10 @@ const displayLoadWord = (words) => {
   words.forEach((word) => {
     const cardWord = document.createElement("div");
     cardWord.innerHTML = `
-        <div class="bg-white text-center max-w-[547px] p-12 rounded-2xl">
-          <h2 class="text-3xl font-bold">${word.word}</h2>
-          <p class="mt-3 mb-6 font-medium">Meaning / Pronounciation</p>
-          <h1 class="hind-siliguri-font font-medium mb-15 text-3xl">"${word.meaning} / ${word.pronunciation}"</h1>
+        <div class="bg-white text-center max-w-[547px] p-10 md:p-12 rounded-2xl">
+          <h2 class="text-2xl md:text-3xl font-bold">${word.word}</h2>
+          <p class="mt-3 mb-6 font-normal md:font-medium">Meaning / Pronounciation</p>
+          <h1 class="hind-siliguri-font font-medium mb-10 md:mb-15 text-2xl md:text-3xl">"${word.meaning} / ${word.pronunciation}"</h1>
           <div class="flex justify-between items-center">
             <button class="bg-[#E8F4FF] hover:bg-[#1A91FF50] cursor-pointer p-3 rounded-lg flex justify-center items-center"><i class="fa-solid text-xl fa-circle-info"></i></button>
             <button class="bg-[#E8F4FF] hover:bg-[#1A91FF50] p-3 rounded-lg flex cursor-pointer justify-center items-center"><i class="fa-solid fa-volume-high"></i></button>
