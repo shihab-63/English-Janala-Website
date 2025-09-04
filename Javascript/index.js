@@ -8,12 +8,23 @@ const loadLesson = () => {
     });
 };
 
+// Remove All Button
+const removeButton = () => {
+  const lessonBtn = document.querySelectorAll(".lesson-btn");
+  lessonBtn.forEach((btn) => btn.classList.remove("active"));
+};
+
 // Load Word
 const loadWord = (id) => {
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((response) => response.json())
-    .then((data) => displayLoadWord(data.data));
+    .then((data) => {
+      removeButton();
+      const clickBtn = document.getElementById(`lesson-btn-${id}`);
+      clickBtn.classList.add("active");
+      displayLoadWord(data.data);
+    });
 };
 
 // Display Load Lesson
@@ -24,7 +35,7 @@ const displaylesson = (lessons) => {
   lessons.forEach((lesson) => {
     const newDiv = document.createElement("div");
     newDiv.innerHTML = `
-        <button onclick = "loadWord(${lesson.level_no})" class="mb-1.5 btn btn-outline btn-primary">
+        <button  id = "lesson-btn-${lesson.level_no}" onclick = "loadWord(${lesson.level_no})" class="mb-1.5 btn btn-outline btn-primary lesson-btn">
             <i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}
         </button>
     `;
@@ -52,9 +63,15 @@ const displayLoadWord = (words) => {
     const cardWord = document.createElement("div");
     cardWord.innerHTML = `
         <div class="bg-white text-center max-w-[547px] p-10 md:p-12 rounded-2xl">
-          <h2 class="text-2xl md:text-3xl font-bold">${word.word ? word.word : 'শব্দ পাওয়া যাইনাই' }</h2>
+          <h2 class="text-2xl md:text-3xl font-bold">${
+            word.word ? word.word : "শব্দ পাওয়া যাইনাই"
+          }</h2>
           <p class="mt-3 mb-6 font-normal md:font-medium">Meaning / Pronounciation</p>
-          <h1 class="hind-siliguri-font font-medium mb-10 md:mb-15 text-2xl md:text-3xl">"${word.meaning ? word.meaning : 'শব্দ পাওয়া যাইনাই'} / ${word.pronunciation ? word.pronunciation : 'শব্দ পাওয়া যাইনাই'}"</h1>
+          <h1 class="hind-siliguri-font font-medium mb-10 md:mb-15 text-2xl md:text-3xl">"${
+            word.meaning ? word.meaning : "শব্দ পাওয়া যাইনাই"
+          } / ${
+      word.pronunciation ? word.pronunciation : "শব্দ পাওয়া যাইনাই"
+    }"</h1>
           <div class="flex justify-between items-center">
             <button class="bg-[#E8F4FF] hover:bg-[#1A91FF50] cursor-pointer p-3 rounded-lg flex justify-center items-center"><i class="fa-solid text-xl fa-circle-info"></i></button>
             <button class="bg-[#E8F4FF] hover:bg-[#1A91FF50] p-3 rounded-lg flex cursor-pointer justify-center items-center"><i class="fa-solid fa-volume-high"></i></button>
