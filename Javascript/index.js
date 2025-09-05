@@ -1,3 +1,28 @@
+const createElement = (arr) => {
+  const createhtmlEle = arr.map(
+    (el) => `
+        <button class="bg-[#E8F4FF] hover:bg-[#1A91FF50] text-sm p-3 rounded-lg flex cursor-pointer justify-center items-center"> ${el} </button>
+        `
+  );
+  return createhtmlEle.join(" ");
+};
+
+const loading = (load) => {
+  if (load === true) {
+    document.getElementById("loading").classList.remove("hidden");
+    document.getElementById("word-lesson-select").classList.add("hidden");
+  } else {
+    document.getElementById("word-lesson-select").classList.remove("hidden");
+    document.getElementById("loading").classList.add("hidden");
+  }
+};
+
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 // Load Lesson
 const loadLesson = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
@@ -16,6 +41,7 @@ const removeButton = () => {
 
 // Load Word
 const loadWord = (id) => {
+  loading(true);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((response) => response.json())
@@ -43,6 +69,56 @@ const displaylesson = (lessons) => {
   });
 };
 
+// Load Word Detail
+const loadWordDetail = (id) => {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((details) => {
+      displayWordDetails(details.data);
+    });
+};
+
+// Display Word Details
+const displayWordDetails = (detail) => {
+  const detailsContainer = document.getElementById("details-container");
+  detailsContainer.innerHTML = `
+        <div>
+              <div class="space-y-4 border border-sky-200 p-5 rounded-xl">
+                <h1 class="text-2xl font-bold">
+                  ${
+                    detail.word
+                  } (<i class="fa-solid fa-microphone-lines"></i> :${
+    detail.pronunciation
+  })
+                </h1>
+                <div class="text-xl">
+                  <h2 class="font-bold mb-2">Meaning</h2>
+                  <p class="hind-siliguri-font font-medium text-lg">${
+                    detail.meaning
+                  }</p>
+                </div>
+                <div class="text-xl">
+                  <h2 class="font-bold mb-2">Example</h2>
+                  <p class="hind-siliguri-font font-medium">
+                    ${detail.sentence}
+                  </p>
+                </div>
+                <div class="text-xl">
+                  <h2 class="font-bold mb-2 hind-siliguri-font">
+                    সমার্থক শব্দ গুলো
+                  </h2>
+                  <div class="flex items-center gap-3.5">
+                    ${createElement(detail.synonyms)}
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary w-full md:w-fit mt-5">Complete Learning</button>
+            </div>
+    `;
+  document.getElementById("my_modal_5").showModal();
+};
+
 // Display Load Word
 const displayLoadWord = (words) => {
   const wordLessonSelect = document.getElementById("word-lesson-select");
@@ -56,6 +132,7 @@ const displayLoadWord = (words) => {
             <h1 class="text-2xl md:text-4xl font-bold">একটি Lesson Select করুন।</h1>
         </div>
     `;
+    loading(false);
     return;
   }
 
@@ -73,13 +150,32 @@ const displayLoadWord = (words) => {
       word.pronunciation ? word.pronunciation : "শব্দ পাওয়া যাইনাই"
     }"</h1>
           <div class="flex justify-between items-center">
-            <button class="bg-[#E8F4FF] hover:bg-[#1A91FF50] cursor-pointer p-3 rounded-lg flex justify-center items-center"><i class="fa-solid text-xl fa-circle-info"></i></button>
-            <button class="bg-[#E8F4FF] hover:bg-[#1A91FF50] p-3 rounded-lg flex cursor-pointer justify-center items-center"><i class="fa-solid fa-volume-high"></i></button>
+            <button onclick="loadWordDetail(${
+              word.id
+            })" class="bg-[#E8F4FF] hover:bg-[#1A91FF50] cursor-pointer p-3 rounded-lg flex justify-center items-center"><i class="fa-solid text-xl fa-circle-info"></i></button>
+            <button onclick = "pronounceWord('${word.word}')" class="bg-[#E8F4FF] hover:bg-[#1A91FF50] p-3 rounded-lg flex cursor-pointer justify-center items-center"><i class="fa-solid fa-volume-high"></i></button>
           </div>
         </div>
     `;
     wordLessonSelect.append(cardWord);
   });
+  loading(false);
 };
 
 loadLesson();
+
+document.getElementById("btn-search").addEventListener("click", () => {
+  removeButton();
+  const input = document.getElementById("input-search");
+  const inputValue = input.value.trim().toLowerCase();
+
+  fetch("https://openapi.programming-hero.com/api/words/all")
+    .then((res) => res.json())
+    .then((data) => {
+      const allWord = data.data;
+      const filterWord = allWord.filter((word) =>
+        word.word.toLowerCase().includes(inputValue)
+      );
+      displayLoadWord(filterWord);
+    });
+});
